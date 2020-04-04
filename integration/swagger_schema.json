@@ -1,0 +1,538 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "",
+        "title": "User Service - Coding Assignment",
+        "description": ""
+    },
+    "paths": {
+        "/logs": {
+            "get": {
+                "operationId": "GET_logs",
+                "summary": "get logs",
+                "tags": [
+                    "Logs"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "logs": {
+                                    "type": "array",
+                                    "additionalItems": false,
+                                    "items": {
+                                        "$ref": "#/definitions/log"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "logs"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/logs/user/{user_id}": {
+            "parameters": [
+                {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "operationId": "GET_logs-user-user_id",
+                "summary": "get user logs",
+                "tags": [
+                    "Logs"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "logs": {
+                                    "type": "array",
+                                    "additionalItems": false,
+                                    "items": {
+                                        "$ref": "#/definitions/log"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "logs"
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "NOT_FOUND"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                }
+            }
+        },
+        "/logs/replay": {
+            "post": {
+                "operationId": "POST_logs-replay",
+                "summary": "replay logs",
+                "tags": [
+                    "Logs"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "logs": {
+                                    "type": "array",
+                                    "additionalItems": false,
+                                    "items": {
+                                        "$ref": "#/definitions/log"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "logs"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "BAD_REQUEST"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "404": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "NOT_FOUND"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "operationId": "GET_users",
+                "summary": "get users",
+                "tags": [
+                    "Users"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "users": {
+                                    "type": "array",
+                                    "additionalItems": false,
+                                    "items": {
+                                        "$ref": "#/definitions/user-output"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "users"
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "POST_users",
+                "summary": "create user",
+                "tags": [
+                    "Users"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/user-input"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/user-output"
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "BAD_REQUEST"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "parameters": [
+                {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[1345][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                }
+            ],
+            "get": {
+                "operationId": "GET_users-user_id",
+                "summary": "get user",
+                "tags": [
+                    "Users"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/user-output"
+                        }
+                    },
+                    "404": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "NOT_FOUND"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "PATCH_users-user_id",
+                "summary": "update user",
+                "tags": [
+                    "Users"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/user-update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/user-output"
+                        }
+                    },
+                    "400": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "BAD_REQUEST"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "404": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "NOT_FOUND"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "DELETE_users-user_id",
+                "summary": "delete user",
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "NOT_FOUND"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "log": {
+            "title": "Log",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[1345][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                },
+                "user_id": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[1345][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                },
+                "action": {
+                    "type": "string",
+                    "enum": [
+                        "create",
+                        "update",
+                        "delete"
+                    ]
+                },
+                "attributes": {
+                    "$ref": "#/definitions/user-output"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "id",
+                "user_id",
+                "action",
+                "attributes",
+                "created_at",
+                "updated_at"
+            ],
+            "additionalProperties": false
+        },
+        "user-output": {
+            "title": "User Output",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[1345][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                },
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 2
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "email",
+                "name",
+                "id",
+                "created_at",
+                "updated_at"
+            ]
+        },
+        "user-input": {
+            "title": "User Input",
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 2
+                }
+            },
+            "required": [
+                "email",
+                "name"
+            ]
+        },
+        "user-update": {
+            "title": "User Update",
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 2
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
