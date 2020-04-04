@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "version": "",
-        "title": "User Service - Coding Assignment",
+        "title": "User Service",
         "description": ""
     },
     "paths": {
